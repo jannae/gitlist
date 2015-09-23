@@ -14,18 +14,18 @@ var path = {
     tmp     : '.tmp',       // Pre-processing tmp dir. Use as needed.
     src     : 'src',        // Base source code. Where any and all code goes.
     vendor  : 'src/vendor',
-    less    : 'src/less',       // Used for the pre-deploy production test build.
+    less    : 'src/less',
     js      : 'js',
     css     : 'css',
     img     : 'img',
     fonts   : 'fonts',
-    cache   : 'cache',
+    cache   : '../../cache',
     root    : '../../'
 };
 
 // Cleans up any directories from old builds
 gulp.task('clean', function () {
-    return del([path.css, path.fonts, path.js, path.root + path.cache + '/*'], {force: true})
+    return del([path.css, path.fonts, path.js, path.cache + '/*'], {force: true})
   });
 
 gulp.task('styles', function () {
@@ -88,16 +88,5 @@ gulp.task('build', ['js', 'jsxtra', 'fonts', 'styles'], function() {
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('serve');
+    gulp.start('build');
 });
-
-/**
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/jquery.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/raphael.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/bootstrap.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/codemirror.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/showdown.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/table.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/main.js"></script>
-<script src="{{ app.request.basepath }}/themes/{{ app.theme }}/js/networkGraph.js"></script>
-*/
