@@ -66,6 +66,7 @@ class Application extends SilexApplication
             $twig->addFilter(new \Twig_SimpleFilter('htmlentities', 'htmlentities'));
             $twig->addFilter(new \Twig_SimpleFilter('md5', 'md5'));
             $twig->addFilter(new \Twig_SimpleFilter('format_date', array($app, 'formatDate')));
+            $twig->addFilter(new \Twig_SimpleFilter('since_date', array($app, 'sinceDate')));
             $twig->addFilter(new \Twig_SimpleFilter('format_size', array($app, 'formatSize')));
 
             return $twig;
@@ -92,6 +93,33 @@ class Application extends SilexApplication
                 $fs->remove($app['cache.archives']);
             }
         });
+    }
+
+    public function sinceDate($date)
+    {
+        $date = $date->format('Y-m-d H:i:s');
+        $date = strtotime($date);
+        // echo ' time now: '.time();
+        // echo ' date here: '.$date;
+        $date = time() - $date; // to get the time since that moment
+        $date = ($date<1)? 1 : $date;
+        $tokens = array (
+            31536000 => 'year',
+            2592000 => 'month',
+            604800 => 'week',
+            86400 => 'day',
+            3600 => 'hour',
+            60 => 'minute',
+            1 => 'second'
+        );
+
+        foreach ($tokens as $unit => $text) {
+            if ($date < $unit) continue;
+            $numberOfUnits = floor($date / $unit);
+            return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s ':' ago');
+        }
+
+    //     return $date->format($this['date.format']);
     }
 
     public function formatDate($date)

@@ -14,7 +14,7 @@
                 <span class="pull-right"><a class="btn btn-default btn-sm" href="{{ path('commit', {repo: repo, commit: item.hash}) }}"><span class="fa fa-list-alt"></span> View {{ item.shortHash }}</a></span>
                 <h4>{{ item.message }}</h4>
                 <span>
-                    <a href="mailto:{{ item.author.email }}">{{ item.author.name }}</a> authored on {{ item.date | format_date }}
+                    <a href="mailto:{{ item.author.email }}">{{ item.author.name }}</a> authored {{ item.date | since_date }}
                     {% if item.author.email != item.commiter.email %}
                     &bull; <a href="mailto:{{ item.commiter.email }}">{{ item.commiter.name }}</a> committed on {{ item.commiterDate | format_date }}
                     {% endif %}
