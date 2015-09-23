@@ -6,6 +6,7 @@ var reload    = bsync.reload;
 var concat    = require('gulp-concat');
 var rename    = require('gulp-rename');
 var uglify    = require('gulp-uglify');
+var del       = require('del');
 
 // useful file paths
 var path = {
@@ -18,11 +19,14 @@ var path = {
     css     : 'css',
     img     : 'img',
     fonts   : 'fonts',
-    root    : '../../../'
+    cache   : 'cache',
+    root    : '../../'
 };
 
 // Cleans up any directories from old builds
-gulp.task('clean', require('del').bind(null, [path.css, path.fonts, path.js]));
+gulp.task('clean', function () {
+    return del([path.css, path.fonts, path.js, path.root + path.cache + '/*'], {force: true})
+  });
 
 gulp.task('styles', function () {
   return gulp.src(path.less + '/style.less')
