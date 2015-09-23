@@ -1,13 +1,17 @@
 // Init Bootstrap
-@import "../vendor/bootstrap/bootstrap.less";
+@import "../vendor/bootstrap/less/bootstrap";
+
+// Open-Sans from bower
+@OpenSansPath: "../fonts";
+@import "../vendor/open-sans-fontface/open-sans";
 
 // override some Variables
-@import "variables.less";
+@import "variables";
 
 // GitList Less Modules
-@import "gitlist.less";
-@import "codemirror.less";
-@import "network.less";
+@import "gitlist";
+@import "codemirror";
+@import "network";
 
 
 .header {
@@ -36,3 +40,5 @@ span.rss-icon {
   }
 }
 
+// FontAwesome Less
+@import "../vendor/font-awesome/less/font-awesome";
