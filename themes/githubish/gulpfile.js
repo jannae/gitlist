@@ -27,6 +27,8 @@ gulp.task('clean', require('del').bind(null, [path.css, path.fonts, path.js]));
 gulp.task('styles', function () {
   return gulp.src(path.less + '/style.less')
     .pipe(less())
+    .pipe(gulp.dest(path.css))
+    .pipe(rename('styles.min.css'))
     .pipe(minifyCSS())
     .pipe(gulp.dest(path.css));
 });
