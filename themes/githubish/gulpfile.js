@@ -57,6 +57,11 @@ gulp.task('js', function () {
         .pipe(gulp.dest(path.js));
 });
 
+gulp.task('jsxtra', function () {
+  gulp.src([path.vendor + '/html5shiv/dist/html5shiv.min.js', path.vendor + '/showdown/dist/showdown.js.map'])
+    .pipe(gulp.dest(path.js));
+});
+
 gulp.task('serve', ['build'], function() {
     bsync({
         notify: false,
@@ -71,7 +76,7 @@ gulp.task('serve', ['build'], function() {
     gulp.watch(path.src + '/' + path.less + '/**/*.less', ['less']);
 });
 
-gulp.task('build', ['js', 'fonts', 'styles'], function() {
+gulp.task('build', ['js', 'jsxtra', 'fonts', 'styles'], function() {
 //    return gulp.src(path.dist + '/**/*').pipe($.size({
 //        title: 'build',
 //        gzip: true
