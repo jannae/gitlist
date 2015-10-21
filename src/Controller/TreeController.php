@@ -25,6 +25,9 @@ class TreeController implements ControllerProviderInterface
             $files = $repository->getTree($tree ? "$branch:\"$tree\"/" : $branch);
             $breadcrumbs = $app['util.view']->getBreadcrumbs($tree);
 
+            $commits = $repository->getPaginatedCommits($commitishPath);
+            $authors = $repository->getAuthorStatistics($commitishPath);
+
             $parent = null;
             if (($slash = strrpos($tree, '/')) !== false) {
                 $parent = substr($tree, 0, $slash);
@@ -36,6 +39,8 @@ class TreeController implements ControllerProviderInterface
                 'files'          => $files->output(),
                 'repo'           => $repo,
                 'branch'         => $branch,
+                'commits'        => $commits,
+                'authors'        => $authors,
                 'path'           => $tree ? $tree . '/' : $tree,
                 'parent'         => $parent,
                 'breadcrumbs'    => $breadcrumbs,

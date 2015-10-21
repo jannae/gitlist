@@ -116,7 +116,7 @@ class Application extends SilexApplication
         foreach ($tokens as $unit => $text) {
             if ($date < $unit) continue;
             $numberOfUnits = floor($date / $unit);
-            return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s ':' ago');
+            return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'').' ago';
         }
 
     //     return $date->format($this['date.format']);

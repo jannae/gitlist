@@ -7430,12 +7430,25 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   border: 1px solid #e7e7e7;
   border-radius: 4px;
 }
+.commit-info {
+  margin: 10px 0;
+  padding: 10px 16px;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  background-color: #d9edf7;
+}
 .download-buttons .rss-icon {
   padding-left: 16px;
   font-size: 23px;
 }
 .space-right {
   padding: 0 8px 0 0;
+}
+.space-left {
+  padding: 0 0 0 8px;
+}
+.space-left-right {
+  padding: 0 8px 0 8px;
 }
 span.rss-icon {
   color: #d9534f;

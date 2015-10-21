@@ -18,7 +18,26 @@
     {% endembed %}
 
     {% if files is not empty %}
-    <table class="table tree">
+        {% if commits %}
+        {% for date, item in commits %}
+        {% if loop.last %}
+            <div class="commit-info">
+                <img src="https://gravatar.com/avatar/{{ item.author.email | lower | md5 }}?s=38" class="pull-left space-right" />
+                <span class="pull-right"><a class="btn btn-default btn-sm" href="{{ path('commit', {repo: repo, commit: item.hash}) }}"><span class="fa fa-list-alt"></span> View {{ item.shortHash }}</a></span>
+                <span>{{ item.message }}<br/></span>
+                <small>
+                    <a href="mailto:{{ item.author.email }}">{{ item.author.name }}</a> authored {{ item.date | since_date }}
+                    {% if item.author.email != item.commiter.email %}
+                    &bull; <a href="mailto:{{ item.commiter.email }}">{{ item.commiter.name }}</a> committed on {{ item.commiterDate | format_date }}
+                    {% endif %}
+                </small>
+            </div>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+            no commits
+        {% endif %}
+        <table class="table tree">
         <thead>
             <tr>
                 <th width="80%">Name</th>
